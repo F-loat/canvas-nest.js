@@ -10,10 +10,12 @@
   function get_attribute(node, attr, default_value) {
     return node.getAttribute(attr) || default_value;
   }
+
   // 封装方法，压缩之后减少文件大小
   function get_by_tagname(name) {
     return document.getElementsByTagName(name);
   }
+
   // 获取配置参数
   function get_config_option() {
     var scripts = get_by_tagname("script"),
@@ -27,6 +29,7 @@
       n: get_attribute(script, "count", 99) // count
     };
   }
+
   // 设置canvas的高宽
   function set_canvas_size() {
     canvas_width = the_canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth, 
@@ -66,6 +69,7 @@
       }
     }), frame_func(draw_canvas);
   }
+
   // 创建画布，并添加到body中
   var the_canvas = document.createElement("canvas"), // 画布
     config = get_config_option(), // 配置
@@ -87,6 +91,7 @@
   // 初始化画布大小
   set_canvas_size();
   window.onresize = set_canvas_size;
+
   // 当时鼠标位置存储，离开的时候，释放当前位置信息
   window.onmousemove = function(e) {
     e = e || window.event;
@@ -96,6 +101,7 @@
     current_point.x = null;
     current_point.y = null;
   };
+
   // 随机生成config.n条线位置信息
   for (var random_points = [], i = 0; config.n > i; i++) {
     var x = random() * canvas_width, // 随机位置
@@ -112,6 +118,7 @@
     });
   }
   all_array = random_points.concat([current_point]);
+  
   // 0.1秒后绘制
   setTimeout(function() {
     draw_canvas();
